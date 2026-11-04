@@ -28,7 +28,7 @@ STEPS = [
     ("Exact 2-cycle densities in bases 2, 4, 6 (Fig. 'bases')", "digitdyn.basedensity", []),
     ("Block certificate: all n < 2^128 (base 2)", "digitdyn.certify_b", ["2", "128", "18"]),
     ("Block certificate: all n < 10^20 (base 10)", "digitdyn.certify_b", ["10", "20", "6"]),
-    ("Climb certificate: all n < 10^341 (base 10, Thm certres)", "digitdyn.climbcert", ["10", "3000", "8"]),
+    ("Climb certificate: all n < 10^2224 (base 10, Thm certres; 8 processes)", "digitdyn.climbcert_par", ["10", "19944", "8", "8"]),
     ("Climb certificate: all n < 2^3024 (base 2, Thm certres)", "digitdyn.climbcert", ["2", "3000", "24"]),
     ("Basin census: cycles vs starting values (Table 'cycles', Fig. 'basins')", "digitdyn.basins", ["200000", "1000000", "2000000"]),
     ("Carry-variance formula and sharp local limit check (Sec. 'osclaw')", "digitdyn.variance", []),

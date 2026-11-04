@@ -65,16 +65,22 @@ error bound. We prove that an orbit is eventually periodic if and only if its
 digit sums are bounded, and that every run of the orbit along which the
 digit sum stays constant moves it by at most $O(k^2)$, where $9k$ is that digit
 sum. Using this and prefix lifting we give a computer-assisted proof that
-every orbit starting below $10^{341}$ is eventually periodic (and, for the
+every orbit starting below $10^{2224}$ is eventually periodic (and, for the
 binary analogue, every orbit starting below $2^{3024}$). Whether \emph{every}
-orbit is eventually periodic remains open; we reduce it to a conjectured
-quadratic bound on climbs of finite auxiliary maps.
+orbit is eventually periodic remains open. It would follow from a uniform
+quantitative strengthening, a conjectured quadratic bound on climbs of
+auxiliary maps, for which we give numerical evidence.
 
 Finally we treat every base $b$. In odd bases every orbit reaches $0$. In
 every even base, including base $2$ where the carry mechanism takes a
 different form, the structural results carry over and the $2$-cycles again
 have density of exact order $(\log D)^{-1/2}$, with resonances at the base-$b$
 repunits $b^j-1$.
+
+\medskip
+\noindent\textbf{MSC 2020:} 11A63 (primary); 60J10, 60F05, 11K65.\\
+\noindent\textbf{Keywords:} digit sum, carries, Markov chain, local limit
+theorem, periodic points, arithmetic dynamics, computer-assisted proof.
 \end{abstract}
 
 \section{Introduction}
@@ -208,7 +214,7 @@ value at its centre with probability of order $(\log D)^{-1/2}$.
 \item A convergence criterion: an orbit is eventually periodic if and only if
   its digit sums are bounded (Theorem~\ref{thm:conv}); and every
   constant-level run moves an orbit by $O(k^2)$ (Theorem~\ref{thm:shortruns});
-  and a computer-assisted proof that every orbit starting below $10^{341}$
+  and a computer-assisted proof that every orbit starting below $10^{2224}$
   (below $2^{3024}$ in base $2$) is eventually periodic
   (Theorems~\ref{thm:cert} and~\ref{thm:certres}).
   Global eventual periodicity (Conjecture~\ref{conj:conv}) remains open.
@@ -669,25 +675,22 @@ $D=10^4$ the density is about $0.0096$.
 resonance approximation (line), with $4.5D=99,999,9999$ marked.}\label{fig:density}
 \end{figure}
 
-\begin{conjecture}[now Corollary~\ref{cor:osc}]\label{conj:density}
-The normalised density $\sqrt{\log D}\,T(D)/10^D$ has no limit as
-$D\to\infty$, with local maxima near $D\approx(10^j-1)/4.5$.
-\end{conjecture}
+Figure~\ref{fig:density} suggests that the normalised density
+$\sqrt{\log_{10}D}\,T(D)/10^D$ has no limit, with local maxima near
+$D\approx(10^j-1)/4.5$. Corollary~\ref{cor:osc} in Section~\ref{sec:osclaw}
+proves this and identifies the limit points exactly: the ratio
+$\limsup/\liminf$ equals $\sqrt{301}/11\approx1.577$. Table~\ref{tab:osc}
+illustrates how slowly this limit is approached.
 
-We first stated this from the data in Table~\ref{tab:osc}, which suggested a
-peak-to-trough ratio of about $1.4$. Corollary~\ref{cor:osc} proves it and
-identifies the limit points exactly. The ratio $\limsup/\liminf$ equals
-$\sqrt{301}/11\approx1.577$; the smaller values in the table are a
-pre-asymptotic effect.
-
-By Theorem~\ref{thm:resrig}, the conjecture concerns only the main term
+By Theorem~\ref{thm:resrig}, the oscillation concerns only the main term
 $\tfrac12\sum_tP_D(t)\rho(t)$, since its error $O((\log D)^2/\sqrt D)$ is much
 smaller than the main term, which is of order $(\log D)^{-1/2}$. We evaluated
 the main term with a Gaussian approximation to $P_D$ (which agrees with the
 exact convolution to six decimal places at $D=200,1000,5000$) up to
-$D\approx6\cdot10^7$. Table~\ref{tab:osc} shows that the ratio between
-consecutive local maxima and minima of the normalised density stays between
-$1.375$ and $1.413$ over six orders of magnitude of $D$.
+$D\approx6\cdot10^7$. Table~\ref{tab:osc} shows that over six orders of
+magnitude of $D$ the ratio between consecutive local maxima and minima stays
+between $1.375$ and $1.413$, still well below its limit $1.577$; Remark~\ref{rem:slow}
+explains why.
 
 \begin{table}[h]
 \centering
@@ -695,15 +698,17 @@ $1.375$ and $1.413$ over six orders of magnitude of $D$.
 \toprule
 $j$ & peak at $D$ & normalised peak & trough at $D$ & normalised trough & ratio\\
 \midrule
-3 & 222 & 0.03766 & 777 & 0.02702 & 1.394\\
-4 & 2{,}222 & 0.04128 & 7{,}777 & 0.02947 & 1.401\\
-5 & 22{,}222 & 0.04178 & 38{,}888 & 0.03037 & 1.375\\
-6 & 222{,}222 & 0.04387 & 614{,}035 & 0.03144 & 1.395\\
-7 & 2{,}222{,}222 & 0.04406 & 6{,}345{,}029 & 0.03160 & 1.394\\
-8 & 22{,}222{,}222 & 0.04545 & 63{,}450{,}292 & 0.03217 & 1.413\\
+3 & 222 & 0.02482 & 777 & 0.01781 & 1.394\\
+4 & 2{,}222 & 0.02720 & 7{,}777 & 0.01942 & 1.401\\
+5 & 22{,}222 & 0.02753 & 38{,}888 & 0.02001 & 1.375\\
+6 & 222{,}222 & 0.02891 & 614{,}035 & 0.02072 & 1.395\\
+7 & 2{,}222{,}222 & 0.02904 & 6{,}345{,}029 & 0.02082 & 1.394\\
+8 & 22{,}222{,}222 & 0.02995 & 63{,}450{,}292 & 0.02120 & 1.413\\
 \bottomrule
 \end{tabular}
-\caption{Local maxima and minima of $\sqrt{\ln D}\,\cdot\frac12\sum_tP_D(t)\rho(t)$
+\caption{Local maxima and minima of $\sqrt{\log_{10}D}\,\cdot\frac12\sum_tP_D(t)\rho(t)$,
+the normalisation of Corollary~\ref{cor:osc}, whose limits are
+$K_0\sqrt6\approx0.0347$ and $K_0\sqrt{726/301}\approx0.0220$
 (computational; the extrema were located by a search over a grid of $D$ near
 $(10^j-1)/4.5$ and $2.5\cdot10^j/4.5$).}\label{tab:osc}
 \end{table}
@@ -1222,9 +1227,9 @@ modulation of Figure~\ref{fig:density} remains.}\label{fig:normalized}
 \subsection{The oscillation law}\label{sec:osclaw}
 
 We now determine the normalised density exactly, up to a factor $1+o(1)$. This
-proves that it oscillates, identifies its limit points and settles
-Conjecture~\ref{conj:density} (in a corrected form: the limiting ratio is
-$\sqrt{301}/11\approx1.577$, not $1.4$). Three new ingredients are needed: an
+proves that it oscillates, identifies its limit points and shows that the
+limiting peak-to-trough ratio is $\sqrt{301}/11\approx1.577$, well above the
+values near $1.4$ seen in Table~\ref{tab:osc}. Three new ingredients are needed: an
 exact formula for the variance of the carry count, a sharp extremal bound for
 the digit averages that this formula involves, and a local limit theorem with
 the sharp constant.
@@ -1354,18 +1359,34 @@ bound $\Pr(|W|<\frac92\delta|S(t)|)\le e^{-9\delta|S(t)|/8}$ give
 for an absolute constant $K$.
 
 \emph{Central limit theorem.} The carries $c_1,c_2,\dots$ form a
-non-homogeneous Markov chain on $\{0,1\}$ whose $i$-th transition matrix has
+non-homogeneous Markov chain on $\{0,1\}$. Its $i$-th transition matrix has
 rows $(1-\frac{t_i}{10},\frac{t_i}{10})$ and
-$(1-\frac{t_i+1}{10},\frac{t_i+1}{10})$. Its Dobrushin contraction coefficient
-is therefore $\frac1{10}$ for every $i$ and every $t$. Truncating $C$ after
-column $\ell+r$ changes it with probability at most $\sum_{i>\ell+r}q_i\le
-10^{-r}$. Dobrushin's central limit theorem for non-homogeneous Markov
-chains~\cite{Dobrushin,SethuramanVaradhan}, applied to bounded functionals
-with contraction coefficients bounded away from $1$, shows that
-$(C-\mu)/\sqrt V$ converges in law to the standard normal along every
-sequence of $t$ with $V\to\infty$. By the usual compactness argument, for
-every $\varepsilon'>0$ there is $V_0$ such that
-$\sup_y|\Pr(C\le\mu+y\sqrt V)-\Phi(y)|\le\varepsilon'$ whenever $V\ge V_0$.
+$(1-\frac{t_i+1}{10},\frac{t_i+1}{10})$, so its Dobrushin contraction
+coefficient $\delta_i=\frac12\sum_y|P_i(0,y)-P_i(1,y)|$ equals $\frac1{10}$, for
+every $i$ and every $t$; the ergodic coefficient is $\alpha_i=1-\delta_i=\frac9{10}$.
+We use Dobrushin's theorem in the form of Sethuraman and
+Varadhan~\cite[Thm.~1.1]{SethuramanVaradhan}. For a triangular array of
+non-homogeneous Markov chains $X^{(n)}_1,\dots,X^{(n)}_{k_n}$ and functions
+$f^{(n)}_i$ with $|f^{(n)}_i|\le C_n$, let $\alpha_n$ be the smallest ergodic
+coefficient in row $n$ and $S_n=\sum_if^{(n)}_i(X^{(n)}_i)$. If
+$C_n^2\alpha_n^{-3}/\sum_i\operatorname{Var}f^{(n)}_i(X^{(n)}_i)\to0$, then
+$(S_n-\mathbb ES_n)/\sqrt{\operatorname{Var}S_n}$ converges in law to the
+standard normal. In our case $f_i(c)=c$, $C_n=1$ and $\alpha_n=\frac9{10}$, and
+$\sum_i\operatorname{Var}c_i=\sum_i\varphi(q_i)=\frac9{11}V$ by
+Lemma~\ref{lem:exactvar}. So the condition is simply $V\to\infty$.
+
+To make this uniform in $t$, suppose it fails. Then there are
+$\varepsilon'>0$ and digit strings $t^{(n)}$ with $V(t^{(n)})\to\infty$ such that
+$\sup_y|\Pr(C\le\mu+y\sqrt V)-\Phi(y)|>\varepsilon'$ for every $n$. Truncate
+the $n$-th chain after column $k_n=\ell_n+r_n$ with $r_n\to\infty$. This
+changes $C$ with probability at most $\sum_{i>k_n}q_i\le10^{-r_n}$, and
+changes $V$ by a factor $1+o(1)$. The array of truncated chains satisfies the
+condition above, so $(C-\mu)/\sqrt V$ converges in law to $N(0,1)$ along
+$t^{(n)}$. By P\'olya's theorem the convergence is uniform in $y$, because
+$\Phi$ is continuous. This contradicts the choice of $t^{(n)}$. Hence for every
+$\varepsilon'>0$ there is $V_0$ with
+$\sup_y|\Pr(C\le\mu+y\sqrt V)-\Phi(y)|\le\varepsilon'$ whenever
+$V(t)\ge V_0$.
 
 \emph{Combination.} Fix $\eta\in(0,1)$ and let
 $J=\{x\in\mathbb Z:|x-m|\le\eta\sqrt V\}$, so $\bigl||J|-2\eta\sqrt V\bigr|\le1$.
@@ -1521,16 +1542,18 @@ $rj/2$ nines, for $j=20,40,80$. The curves rise from the typical value to the
 peak in the same way for every $j$.}\label{fig:osclaw}
 \end{figure}
 
-\begin{remark}[Why Table~\ref{tab:osc} shows $1.4$]
+\begin{remark}[Why Table~\ref{tab:osc} shows $1.4$]\label{rem:slow}
 The approach to the limit is logarithmically slow. At $D\approx2\cdot10^7$ the
 random part of the digit sum has only about four digits and the
 deterministic part about four. The $O(1)$ boundary terms in $V(t)$ are then
 comparable with the main terms. Evaluating the main term by sampling
 $3000$ digit sums from the Gaussian window, with exact integer arithmetic, at
 the peak $D=\lfloor10^j/4.5\rfloor$ and at the trough
-$D=\lfloor\frac29y_j\rfloor$ gives ratios $1.517$, $1.525$, $1.531$, $1.532$,
-$1.545$, $1.557$, $1.558$ and $1.566$ for $j=8,12,16,24,32,48,64,96$. They
-increase towards $\sqrt{301}/11=1.5772$. The quantity
+$D=\lfloor\frac29y_j\rfloor$ gives ratios $1.524\pm0.005$, $1.519\pm0.003$,
+$1.526\pm0.003$, $1.542\pm0.002$, $1.545\pm0.002$, $1.551\pm0.001$,
+$1.562\pm0.001$ and $1.565\pm0.001$ for $j=8,12,16,24,32,48,64,96$. The
+errors are one standard error, from the sample variances by the delta
+method. The ratios increase towards $\sqrt{301}/11=1.5772$. The quantity
 $\rho(t)\sqrt{2\pi V(t)}$ of Theorem~\ref{thm:sharpllt} averages $0.9865$,
 $0.9948$, $0.9982$ and $0.9994$ over random $t$ with $10$, $30$, $100$ and
 $300$ digits.
@@ -1966,7 +1989,7 @@ times with pointer doubling, in exact integer arithmetic.
 
 \begin{theorem}[Eventual periodicity below explicit bounds]\label{thm:certres}
 Every orbit of the binary map $f_2$ starting below $2^{3024}$, and every orbit
-of the decimal map $f$ starting below $10^{341}$, is eventually periodic. For
+of the decimal map $f$ starting below $10^{2224}$, is eventually periodic. For
 these starting values, $\max(\text{orbit})-n<2\cdot2^{24}$ and
 $\max(\text{orbit})-n<2\cdot10^{8}$, respectively.
 \end{theorem}
@@ -1992,13 +2015,13 @@ $10$ & $10^{20}$ & $10^{6}$ & $126$ & $181$ & $14$\,s\\
 $10$ & $10^{30}$ & $10^{7}$ & $207$ & $271$ & $3.5$\,min\\
 \midrule
 $2$ & $2^{3024}$ & $2^{24}$ & $3000$ & $3025$ & $30$\,s$^*$\\
-$10$ & $10^{341}$ & $10^{8}$ & $2997$ & $3070$ & $20$\,s$^*$\\
+$10$ & $10^{2224}$ & $10^{8}$ & $19944$ & $20017$ & $2$\,min$^{*\dagger}$\\
 \bottomrule
 \end{tabular}
 \caption{Parameters for which the block certificate (Theorem~\ref{thm:cert})
 was verified, with running times on a laptop. Rows marked $^*$ use the
 climb method: every orbit is followed on the half-line and its maximum is
-compared with $b^L$.}\label{tab:cert}
+compared with $b^L$. $^\dagger$On $8$ cores.}\label{tab:cert}
 \end{table}
 
 \emph{Climb method.} The hypothesis of Theorem~\ref{thm:cert} only concerns
@@ -2008,15 +2031,35 @@ suffices to follow each entry $x_0<E$ on the half-line, until it falls below
 $0$ or closes a cycle, and to check that its maximum is below $b^L$. Memoising
 the maximum over each orbit makes this cost roughly linear in the number of
 states actually visited, rather than $b^L$. This removes the memory
-bottleneck of the block arrays. For $\sigma\le3000$ and every entry below
-$E$, the highest point reached is $2{,}011{,}888$ in base $10$ and
-$2{,}107{,}392$ in base $2$, which gives the last two rows of
-Table~\ref{tab:cert}. On the six small parameter sets used below, the climb
+bottleneck of the block arrays. In base $10$ with $L=8$, for every
+$\sigma\le19{,}944$ and every entry below $E=20{,}017$, the highest point reached
+is $20{,}020{,}006$ (at $\sigma=19{,}943$), below $10^8$. In base $2$ with $L=24$,
+for $\sigma\le3000$, it is $2{,}107{,}392<2^{24}$. These give the last two rows of
+Table~\ref{tab:cert}. Figure~\ref{fig:climb} shows the maximum climb as a
+function of $\sigma$. It is not smooth: a slowly rising baseline carries sharp
+spikes when $\sigma$ is just below a multiple of $1000$, about $2\cdot10^6$ at
+even thousands, $10^7$ near $10^4$ and $2\cdot10^7$ near $2\cdot10^4$. There the
+step $\sigma+s(x)$ is just below a round number, and carries propagate
+through long blocks of nines: this is the resonance of
+Section~\ref{sec:resonance}, now acting on climbs. The next spike makes $L=8$
+insufficient. At $\sigma=19{,}961$ an orbit reaches about $2\cdot10^8$, so
+extending the range needs $L=9$. The reported range is therefore the largest
+this block size certifies, not an artefact of stopping early.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/climb_profile.pdf}
+\caption{Maximum climb of the low maps $g_\sigma$ from all entries
+$x_0<E=20{,}017$, against $\sigma$ (base $10$, $L=8$). Every value lies below
+the block size $10^8$, which proves Theorem~\ref{thm:certres} for all
+$n<10^{2224}$. Spikes occur just below multiples of $1000$, where the step is
+close to a round number.}\label{fig:climb}
+\end{figure} On the six small parameter sets used below, the climb
 method and the block method give identical verdicts, including the failure at
 $(2,16,8)$.
 
 These ranges exceed exhaustive enumeration ($n\le2\cdot10^6$) by a factor of
-about $10^{335}$ in base $10$. Two checks guard against errors in the
+about $10^{2218}$ in base $10$. Two checks guard against errors in the
 implementation. First, for small parameters
 ($(b,D,L)=(2,18,9),(4,8,5),(10,5,3),(10,6,4)$) every orbit starting below
 $b^D$ was followed directly, and its high part never exceeded $H_0+1$, as the
@@ -2075,7 +2118,8 @@ $b^{L_{\min}}\approx\sigma^2/4$. This is the order of the height
 $2b^{\ell+\kappa}\le2((b-1)bk)^2$ of a constant-level run in
 Theorem~\ref{thm:shortruns}. It suggests that climbs from the bottom are no
 higher than single constant-level runs, so the level changes inside an ascent
-do not compound. Conjecture~\ref{conj:conv} would therefore follow from:
+do not compound. Conjecture~\ref{conj:conv} would follow from the uniform
+quantitative strengthening below.
 
 For the statement we use the half-line map
 $\bar g_\sigma(x)=x+\sigma+s_b(x)$ ($x$ odd), $x-\sigma-s_b(x)$ ($x$ even), on
@@ -2089,23 +2133,29 @@ $\sigma\ge0$ and every $X\ge0$, every orbit of $\bar g_\sigma$ that starts at
 some $x_0\le X$ stays below $c\,(\sigma+X+1)^2$.
 \end{conjecture}
 
-Conjecture~\ref{conj:quad} implies Conjecture~\ref{conj:conv}. Given $D$,
+Conjecture~\ref{conj:quad} is a strengthening of Conjecture~\ref{conj:conv},
+not a reduction of it. Since $\bar g_0=f$, the case $\sigma=0$ already says
+that every orbit of $f$ starting at $x_0\le X$ stays below $c(X+1)^2$, a
+quantitative form of Conjecture~\ref{conj:conv}. What the conjecture adds is
+uniformity in $\sigma$, which is the form the block certificate needs. That
+it implies Conjecture~\ref{conj:conv} can be seen directly, or through
+Theorem~\ref{thm:cert}, as follows. Given $D$,
 choose $L$ minimal with $b^L>c\,(2(b-1)D+1)^2$, so $L=O(\log D)$, and apply
 Theorem~\ref{thm:cert}. Its hypothesis concerns $\sigma\le\sigma_{\max}=(b-1)(D-L)$
 and entries $x_0<E=\sigma_{\max}+(b-1)L+1$. With $X=E$ the conjecture bounds
 every such orbit by $c(\sigma_{\max}+E+1)^2\le c(2(b-1)D+1)^2<b^L$, so no orbit
 reaches the top of the block. The data of Theorem~\ref{thm:certres} are
-consistent with $c=1$: for $\sigma\le3000$ and $X=E$ the highest point is
-$2{,}011{,}888<(3000+3073)^2$ in base $10$, and $2{,}107{,}392<(3000+3025)^2$ in
-base $2$. For
+consistent with $c=1$: for $\sigma\le19{,}944$ and $X=E$ the highest point is
+$20{,}020{,}006<(19{,}944+20{,}017)^2$ in base $10$, and for $\sigma\le3000$ it is
+$2{,}107{,}392<(3000+3025)^2$ in base $2$. For
 $10\le\sigma\le3000$ and all entries $x\le\sigma+(b-1)\cdot8$ (base $10$) or
 $x\le\sigma+24$ (base $2$), about $4.7$ million starting points in each base,
 the highest point is below $1.71(\sigma+1)^2$ in base $10$ and
 $1.19(\sigma+1)^2$ in base $2$. The number of separate up-runs in a climb is
 not bounded, however. It reaches $19$ in base $10$ and $61$ in base $2$, with
 up to $33$ and $61$ level changes. So a proof cannot simply count runs: it must
-show that successive runs do not stack. It is a statement
-about the finite maps $g_\sigma$ alone. Theorem~\ref{thm:shortruns} proves it
+show that successive runs do not stack. The conjecture concerns only the
+maps $\bar g_\sigma$, with no dynamics of the prefix. Theorem~\ref{thm:shortruns} proves it
 for runs at constant level. What remains is to control level increases inside
 an ascent, which we do not know how to do.
 
@@ -2221,7 +2271,7 @@ and $9$ once, both totalling $135$.
 \clearpage
 \section{Open problems}
 \begin{enumerate}
-\item Prove Conjecture~\ref{conj:conv}. It is proved below $10^{341}$
+\item Prove Conjecture~\ref{conj:conv}. It is proved below $10^{2224}$
   (Theorem~\ref{thm:certres}); by Theorem~\ref{thm:cert} the general case would
   follow from the absence of upward crossings for the finite maps $g_\sigma$
   with blocks of size $b^{O(\log\sigma)}$. By Theorem~\ref{thm:shortruns} it
@@ -2272,12 +2322,12 @@ Theorems~\ref{thm:self}, \ref{thm:level}, \ref{thm:reverse}
 and~\ref{thm:balance}; the block and climb certificates of
 Theorem~\ref{thm:certres}, with their outputs; the exact carry-variance and
 oscillation-law computations (Section~\ref{sec:osclaw}); the basin census
-(Table~\ref{tab:cycles}); a test suite of $57$ tests; a single script that
+(Table~\ref{tab:cycles}); a test suite of $58$ tests; a single script that
 regenerates every table and figure; and SHA-256 hashes of the released
 sources and certificate outputs. All computations were run on an Apple M1
 laptop with 8\,GB of memory, using Python~3.11.9, NumPy~1.26.4 and
-Matplotlib~3.10.6. The certificates for $10^{341}$ and $2^{3024}$ each take
-under a minute; the slowest step of the full reproduction is the
+Matplotlib~3.10.6. The certificate for $2^{3024}$ takes under a minute, and the one for
+$10^{2224}$ about two minutes on $8$ cores; the slowest step of the full reproduction is the
 oscillation table (Table~\ref{tab:osc}), which evaluates the main term up to
 $D\approx6\cdot10^7$. Throughout the paper we distinguish \emph{theorems}
 (proved), \emph{computational statements} (exact computations over a stated

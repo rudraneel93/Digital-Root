@@ -50,14 +50,14 @@ exact computations over a stated range, and conjectures.
 
 **Proved by computer**
 
-- Every orbit starting below **10^341** (base 10), and below **2^3024** in
+- Every orbit starting below **10^2224** (base 10), and below **2^3024** in
   base 2, is eventually periodic. The proof uses the block and climb
   certificates, which are checked by two independent methods.
 
 **Open**
 
-- Whether *every* orbit is eventually periodic. The manuscript reduces this to
-  a precise "quadratic climbs" conjecture.
+- Whether *every* orbit is eventually periodic. It would follow from a
+  uniform quantitative strengthening, the "quadratic climbs" conjecture.
 - Whether all cycles, not only 2-cycles, have density zero. About 4–6% of
   numbers up to 512 digits are periodic, and 4-cycles are almost as common
   as 2-cycles.
@@ -69,7 +69,7 @@ exact computations over a stated range, and conjectures.
 | [`digitdyn/`](digitdyn/) | Python package reproducing every computation in the manuscript ([README](digitdyn/README.md)) |
 | [`digitdyn/manuscript/`](digitdyn/manuscript/) | LaTeX source, PDF and figures |
 | [`digitdyn/data/`](digitdyn/data/) | Data behind the tables and figures, including the certificate outputs |
-| [`digitdyn/tests/`](digitdyn/tests/) | 57 tests checking theorems against brute force |
+| [`digitdyn/tests/`](digitdyn/tests/) | 58 tests checking theorems against brute force |
 | [`Digital Root/`](Digital%20Root/) | The original exploratory project (2025): cycle tables, plots and an early write-up |
 
 ## Quick start
@@ -78,8 +78,8 @@ From the repository root:
 
 ```bash
 pip install numpy matplotlib pytest
-python3 -m pytest digitdyn/tests                 # 57 tests, about 15 s
-python3 -m digitdyn.climbcert 10 3000 8          # certificate: all n < 10^341
+python3 -m pytest digitdyn/tests                 # 58 tests, about 15 s
+python3 -m digitdyn.climbcert_par 10 19944 8 8   # certificate: all n < 10^2224 (~2 min, 8 cores)
 python3 -m digitdyn.climbcert 2 3000 24          # certificate: all n < 2^3024
 python3 -m digitdyn.reproduce                    # regenerate every table and figure
 ```
@@ -99,7 +99,7 @@ analysis corrects:
   Every orbit does reach a multiple of 9 after its first even term, but this
   can take up to 14 steps.
 - *"Every orbit converges to a cycle or 0."* This is **not proved**. It is
-  the open conjecture above, verified for all starting values below 10^341.
+  the open conjecture above, verified for all starting values below 10^2224.
 
 The cycle census in that folder has also been recomputed: Tables 7 and 8 of
 the manuscript replace the earlier counts.
