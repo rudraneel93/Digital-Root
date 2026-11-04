@@ -381,3 +381,15 @@ def test_basin_census_small():
     cyc = r["distinct_cycles_by_length"]
     assert cyc[1] == 1 and cyc[2] > cyc.get(4, 0)
     assert abs(sum(r["start_fraction_by_cycle_length"].values()) - 1) < 1e-9
+
+
+def test_climb_profile_certifies_10_pow_2224():
+    """The saved profile behind Thm certres: every sigma <= 19944 stays below 10^8,
+    and spot-checked sigmas recompute exactly."""
+    import json
+    from digitdyn.climbcert import max_height
+    d = json.load(open("digitdyn/data/climb_profile_b10_S19944_L8.json"))
+    assert d["E"] == 19944 + 9 * 8 + 1 and len(d["heights"]) == 19945
+    assert max(d["heights"]) < 10 ** 8
+    for sg in (0, 1952, 9960):
+        assert max_height(10, sg, d["E"]) == d["heights"][sg]

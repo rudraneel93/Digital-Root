@@ -321,12 +321,11 @@ def fig_osclaw():
     Ds = sorted(d for d in Ds if d > 50)
     xs = [math.log10(d) for d in Ds]
     ys = [pred(d) for d in Ds]
-    samp_peak = {8: .3980, 12: .3343, 16: .2937, 24: .2425, 32: .2128, 48: .1761, 64: .1530, 96: .1259}
-    samp_tr = {8: .2688, 12: .2226, 16: .1940, 24: .1595, 32: .1385, 48: .1135, 64: .0985, 96: .0806}
-    px = [math.log10(10 ** j * 2 // 9) for j in samp_peak]
-    py = [math.sqrt(x) * r / 36 for x, r in zip(px, samp_peak.values())]
-    tx = [math.log10(int(("45" * 60)[:j]) * 2 // 9) for j in samp_tr]
-    ty = [math.sqrt(x) * r / 36 for x, r in zip(tx, samp_tr.values())]
+    rows = json.load(open("digitdyn/data/osc_sampling.json"))
+    px = [math.log10(10 ** r["j"] * 2 // 9) for r in rows]
+    py = [math.sqrt(x) * r["peak"] / 36 for x, r in zip(px, rows)]
+    tx = [math.log10(int(("45" * 80)[:r["j"]]) * 2 // 9) for r in rows]
+    ty = [math.sqrt(x) * r["trough"] / 36 for x, r in zip(tx, rows)]
 
     fig, (ax, bx) = plt.subplots(1, 2, figsize=(6.6, 2.9), gridspec_kw={"width_ratios": [1.7, 1]})
     ax.plot(xs, ys, "-", color=BLUE, lw=0.5, alpha=0.9, label="the law (Theorem 10.10)")
@@ -394,3 +393,30 @@ def fig_basins():
 if __name__ == "__main__":
     fig_osclaw()
     fig_basins()
+
+
+def fig_climb_profile():
+    """Maximum climb of the low maps g_sigma from entries x0 < E, against sigma
+    (base 10, L = 8, sigma <= 19944): the certificate for all n < 10^2224."""
+    d = json.load(open("digitdyn/data/climb_profile_b10_S19944_L8.json"))
+    h = np.array(d["heights"], dtype=float)
+    s = np.arange(len(h))
+    fig, ax = plt.subplots(figsize=(6.2, 2.8))
+    ax.plot(s, h, "-", color=BLUE, lw=0.6, label="max climb from entries $x_0<E$")
+    ax.axhline(1e8, color=ORANGE, lw=1.2, ls=(0, (4, 3)), label="block size $10^8$ ($L=8$)")
+    ax.set_yscale("log")
+    for x, lab in ((2000, "$2000$"), (10000, "$10^4$"), (19944, "$2\\cdot10^4$")):
+        ax.annotate(lab, xy=(x, h[max(0, x - 120):x + 1].max()), xytext=(x, 3.5e8),
+                    ha="center", fontsize=7, color=INK2,
+                    arrowprops=dict(arrowstyle="-", color=INK2, lw=0.6, ls=(0, (2, 2))))
+    ax.set_xlim(0, len(h))
+    ax.set_ylim(1e3, 1e9)
+    ax.set_xlabel(r"prefix digit sum $\sigma$")
+    ax.set_ylabel("highest point")
+    ax.set_title("Climb profile: a slowly rising baseline, with spikes just below multiples of 1000")
+    ax.legend(loc="lower right", fontsize=7.5)
+    save(fig, "climb_profile.pdf")
+
+
+if __name__ == "__main__":
+    fig_climb_profile()

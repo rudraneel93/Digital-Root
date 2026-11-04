@@ -17,7 +17,7 @@ pip install numpy matplotlib pytest
 ## Quick start (from the directory that contains `digitdyn/`)
 
 ```bash
-python3 -m pytest digitdyn/tests -q      # 50 tests, about 40 s
+python3 -m pytest digitdyn/tests -q      # 58 tests, about 15 s
 python3 -m digitdyn.reproduce            # every table and figure, about 10-15 min
 ```
 
@@ -31,12 +31,14 @@ python3 -m digitdyn.reproduce            # every table and figure, about 10-15 m
 | `profile.py` | Low-map cycle profile c_L(σ) for L = 5 and the prefix-lifting predictions |
 | `resonance.py` | Carry-resonance probabilities ρ(t) and the resonance approximation to T(D)/10^D |
 | `excursion.py` | Largest excursion over 300 random starts per digit length, fixed seed `random.Random(0)` |
-| `oscillation.py` | Peaks and troughs of the normalised 2-cycle density up to D ≈ 6·10⁶ (oscillation table) |
+| `oscillation.py` | Peaks and troughs of the normalised 2-cycle density up to D ≈ 6·10⁷ (oscillation table) |
 | `baseb.py` | The map in base b: odd bases reach 0; exact checks of the even-base structure theorem; 2-cycle counts T_b(D) by digit DP |
 | `basedensity.py` | Exact 2-cycle densities in bases 2, 4, 6 (multi-base resonance figure) |
 | `figures.py` | All data figures (PDF) |
 | `certify_b.py` | Block certificate (computer-assisted proof of eventual periodicity below b^D): e.g. `python3 -m digitdyn.certify_b 10 30 7` proves it for all n < 10^30 (about 3.5 min) |
-| `climbcert.py` | Climb certificate (memoised half-line orbits, no block arrays): `python3 -m digitdyn.climbcert 10 3000 8` proves eventual periodicity for all n < 10^341 (~20 s); `... 2 3000 24` for all n < 2^3024 (~30 s). Outputs in `data/climbcert_b*.txt` |
+| `climbcert.py` | Climb certificate (memoised half-line orbits, no block arrays): `python3 -m digitdyn.climbcert 10 3000 8` checks σ ≤ 3000 (all n < 10^341, ~20 s); `... 2 3000 24` proves all n < 2^3024 (~30 s). Outputs in `data/climbcert_b*.txt` |
+| `climbcert_par.py` | Parallel climb certificate with the max climb per σ: `python3 -m digitdyn.climbcert_par 10 19944 8 8` proves all n < 10^2224 (~2 min on 8 cores); profile in `data/climb_profile_b10_S19944_L8.json` (Fig. `climb`) |
+| `osc_sampling.py` | Sampled peak/trough ratios with standard errors (Remark `rem:slow`) |
 | `variance.py` | Exact carry-count variance V(t) = (11/9) sum q_i(1-q_i) (Lemma `lem:exactvar`), sharp local limit check, and window averages behind the oscillation law (Theorem `thm:osclaw`) |
 | `basins.py` | Basin census: share of distinct cycles vs share of starting values by cycle length (`data/basins.json`) |
 | `periodic_sample.py` | Sampled proportion of periodic points among random D-digit numbers |
