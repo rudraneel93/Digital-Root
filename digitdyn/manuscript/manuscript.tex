@@ -2257,8 +2257,10 @@ and $9$ once, both totalling $135$.
 
 \section*{Data and code}
 All computations are reproducible with the accompanying Python package
-(\texttt{digitdyn}), archived at \texttt{[repository URL and DOI to be
-added]}. It contains: the exhaustive orbit and cycle census
+(\texttt{digitdyn}), available at
+\url{https://github.com/rudraneel93/Digital-Root} (directory
+\texttt{digitdyn}); an archived release with a DOI will be added. It
+contains: the exhaustive orbit and cycle census
 (Proposition~\ref{prop:census}, Tables~\ref{tab:cycles}
 and~\ref{tab:corrected}); the digit dynamic programme for $T(D)$
 (Table~\ref{tab:density}), tested against exhaustive enumeration for
@@ -2266,8 +2268,17 @@ $D\le5$; the prefix-lifting counter (Theorem~\ref{thm:lift},
 Corollary~\ref{cor:lifterr}); the carry-resonance computation
 (Theorem~\ref{thm:resrig}); exact checks of
 Theorems~\ref{thm:self}, \ref{thm:level}, \ref{thm:reverse}
-and~\ref{thm:balance}; a test suite; and a single script that regenerates
-every table and figure. Throughout the paper we distinguish \emph{theorems}
+and~\ref{thm:balance}; the block and climb certificates of
+Theorem~\ref{thm:certres}, with their outputs; the exact carry-variance and
+oscillation-law computations (Section~\ref{sec:osclaw}); the basin census
+(Table~\ref{tab:cycles}); a test suite of $57$ tests; a single script that
+regenerates every table and figure; and SHA-256 hashes of the released
+sources and certificate outputs. All computations were run on an Apple M1
+laptop with 8\,GB of memory, using Python~3.11.9, NumPy~1.26.4 and
+Matplotlib~3.10.6. The certificates for $10^{341}$ and $2^{3024}$ each take
+under a minute; the slowest step of the full reproduction is the
+oscillation table (Table~\ref{tab:osc}), which evaluates the main term up to
+$D\approx6\cdot10^7$. Throughout the paper we distinguish \emph{theorems}
 (proved), \emph{computational statements} (exact computations over a stated
 finite range) and \emph{conjectures}.
 
