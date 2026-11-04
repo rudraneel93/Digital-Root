@@ -93,17 +93,22 @@ cd digitdyn && shasum -a 256 -c SHA256SUMS
 
 ## A note on the original `Digital Root/` folder
 
-The early write-up in `Digital Root/` states two results that the later
-analysis corrects:
+`Digital Root/` holds the project's two earlier write-ups (June and September
+2025) and the original README. The manuscript supersedes them and corrects
+them in its introduction ("Earlier versions"):
 
-- *"Every orbit reaches a multiple of 9 within two steps."* This is **false**.
-  Every orbit does reach a multiple of 9 after its first even term, but this
-  can take up to 14 steps.
-- *"Every orbit converges to a cycle or 0."* This is **not proved**. It is
-  the open conjecture above, verified for all starting values below 10^2224.
-
-The cycle census in that folder has also been recomputed: Tables 7 and 8 of
-the manuscript replace the earlier counts.
+- **Reaching a multiple of 9.** The June write-up conjectured that every
+  orbit does this within five steps, and the old README stated it as a
+  theorem with *two* steps. Both are **false**: n = 899457 needs 14 steps.
+  It is true that every term after the first even term is a multiple of 9.
+- **Convergence.** That every orbit converges to a cycle or 0 is a conjecture
+  in the June write-up but a "theorem" in the old README. It is **not
+  proved**: it is the open conjecture above, verified below 10^2224.
+- **Cycle counts.** The September write-up reports 9,001 distinct cycles
+  reached from the multiples of 9 up to 200,000, and suggests linear growth.
+  Exact enumeration gives **4,149**, and the number of 2-cycles grows like
+  N/sqrt(log log N). Tables 7 and 8 of the manuscript replace the earlier
+  counts.
 
 ## Citation
 

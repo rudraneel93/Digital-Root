@@ -150,6 +150,22 @@ carry count (Lemma~\ref{lem:exactvar}) and an extremal bound for its digit
 averages (Lemma~\ref{lem:kappa}). Together these yield the density and
 oscillation theorems.
 
+\paragraph{Earlier versions.} Two earlier, exploratory write-ups of this
+project, from June and September 2025, are archived with their sources in the
+accompanying repository~\cite{digitdynZenodo}, in the folder
+\texttt{Digital Root/}. The present paper supersedes them, and three of their
+statements need correction. First, the June write-up conjectured that every
+orbit reaches a multiple of $9$ within five steps. This fails: $n=899457$
+needs $14$ (Proposition~\ref{prop:nine}). Second, the September write-up
+suggested that the number of distinct cycles grows roughly linearly with $N$.
+For $2$-cycles, which are most of the cycles, the count is of order
+$N/\sqrt{\log\log N}$ (Theorem~\ref{thm:sharp}), so it grows only barely
+sublinearly. Third, its cycle counts could not be reproduced. For example, it
+reports $9{,}001$ distinct cycles reached from the multiples of $9$ up to
+$200{,}000$, where exact enumeration gives $4{,}149$
+(Table~\ref{tab:corrected}). Global convergence, stated there as a
+conjecture, remains open (Conjecture~\ref{conj:conv}).
+
 Maps that branch on the parity of $n$ are a natural test bed for
 deterministic dynamics that behave ``as if random'': the branching couples a
 local, arithmetic rule (here the propagation of carries) to a global
