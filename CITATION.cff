@@ -7,8 +7,8 @@ authors:
     given-names: Rudraneel
     affiliation: Independent Researcher
     orcid: "https://orcid.org/0009-0009-6173-0262"
-version: v1.0.1
-doi: 10.5281/zenodo.23938785
+version: v1.0.2
+doi: 10.5281/zenodo.23940129
 date-released: 2026-11-04
 license: MIT
 repository-code: "https://github.com/rudraneel93/Digital-Root"
@@ -17,8 +17,8 @@ identifiers:
     value: 10.5281/zenodo.23938784
     description: "Concept DOI (all versions)"
   - type: doi
-    value: 10.5281/zenodo.23938785
-    description: "Version v1.0.1"
+    value: 10.5281/zenodo.23940129
+    description: "Version v1.0.2"
   - type: doi
     value: 10.5281/zenodo.23938983
     description: "Preprint (all versions)"
