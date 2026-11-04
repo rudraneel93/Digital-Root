@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this software or its results, please cite it as below."
+title: "digitdyn: code and data for \"Carries, Rails and Resonance: the Structure of the Digit-Sum Parity Map\""
+type: software
+authors:
+  - family-names: Das
+    given-names: Rudraneel
+    affiliation: Independent Researcher
+    orcid: "https://orcid.org/0009-0009-6173-0262"
+version: v1.0.1
+doi: 10.5281/zenodo.23938785
+date-released: 2026-11-04
+license: MIT
+repository-code: "https://github.com/rudraneel93/Digital-Root"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23938784
+    description: "Concept DOI (all versions)"
+  - type: doi
+    value: 10.5281/zenodo.23938785
+    description: "Version v1.0.1"
+keywords:
+  - digit sum
+  - carries
+  - arithmetic dynamics
+  - periodic points
+  - computer-assisted proof
