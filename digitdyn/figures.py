@@ -247,14 +247,14 @@ def fig_normalized():
     De = np.array([r[0] for r in exact])
     ve = np.array([r[1] for r in exact])
     fig, ax = plt.subplots(figsize=(6.0, 2.5))
-    ax.plot(D, v * np.sqrt(np.log(D)), color=BLUE, lw=1.6, label="resonance formula")
-    ax.plot(De, ve * np.sqrt(np.log(De)), "o", ms=6, color=ORANGE, mec="white", mew=1.2,
+    ax.plot(D, v * np.sqrt(np.log10(D)), color=BLUE, lw=1.6, label="resonance formula")
+    ax.plot(De, ve * np.sqrt(np.log10(De)), "o", ms=6, color=ORANGE, mec="white", mew=1.2,
             label="exact")
     ax.set_xscale("log")
     ax.set_xlabel("number of digits $D$ (log scale)")
-    ax.set_ylabel("√(ln $D$) × $T(D)/10^D$")
-    ax.set_title("Normalised 2-cycle density √(ln $D$) × $T(D)/10^D$: bounded above and below")
-    ax.set_ylim(0, 0.045)
+    ax.set_ylabel(r"$\sqrt{\log_{10}D}\;T(D)/10^D$")
+    ax.set_title(r"Normalised 2-cycle density $\sqrt{\log_{10}D}\;T(D)/10^D$: bounded above and below")
+    ax.set_ylim(0, 0.03)
     ax.legend(loc="lower right", fontsize=7.5)
     save(fig, "normalized_density.pdf")
 
