@@ -393,3 +393,11 @@ def test_climb_profile_certifies_10_pow_2224():
     assert max(d["heights"]) < 10 ** 8
     for sg in (0, 1952, 9960):
         assert max_height(10, sg, d["E"]) == d["heights"][sg]
+
+
+def test_standalone_checker_agrees_and_fails_correctly():
+    import subprocess, sys
+    ok = subprocess.run([sys.executable, "digitdyn/verify_certificates.py", "10", "63", "5"], capture_output=True, text=True)
+    assert ok.returncode == 0 and "VERIFIED: every orbit of f_10 starting below 10^12" in ok.stdout
+    bad = subprocess.run([sys.executable, "digitdyn/verify_certificates.py", "2", "8", "8"], capture_output=True, text=True)
+    assert bad.returncode == 1 and "NOT VERIFIED" in bad.stdout
