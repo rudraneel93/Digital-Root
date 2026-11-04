@@ -1,0 +1,9 @@
+  sigma=0 max height so far 3,116 [0s]
+  sigma=500 max height so far 21,394 [3s]
+  sigma=1000 max height so far 110,898 [7s]
+  sigma=1500 max height so far 110,898 [10s]
+  sigma=2000 max height so far 2,011,888 [13s]
+  sigma=2500 max height so far 2,011,888 [15s]
+  sigma=3000 max height so far 2,011,888 [18s]
+base 10: sigma <= 3000, entries < 3073: max climb height 2,011,888 (max h/(sigma+1)^2 for sigma>=10: 26.248); b^L = 100,000,000
+CERTIFIED: every orbit of f_10 starting below 10^341 is bounded and eventually periodic.
