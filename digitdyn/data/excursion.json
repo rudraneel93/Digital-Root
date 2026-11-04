@@ -1,0 +1,36 @@
+{
+ "seed": 0,
+ "starts": 300,
+ "rows": [
+  {
+   "D": 10,
+   "max_excursion": 661,
+   "max_steps": 29
+  },
+  {
+   "D": 20,
+   "max_excursion": 1031,
+   "max_steps": 24
+  },
+  {
+   "D": 50,
+   "max_excursion": 5568,
+   "max_steps": 66
+  },
+  {
+   "D": 100,
+   "max_excursion": 5921,
+   "max_steps": 30
+  },
+  {
+   "D": 200,
+   "max_excursion": 10592,
+   "max_steps": 55
+  },
+  {
+   "D": 400,
+   "max_excursion": 20505,
+   "max_steps": 41
+  }
+ ]
+}
