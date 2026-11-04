@@ -130,6 +130,26 @@ one-dependent determinantal processes~\cite{BorodinDiaconisFulman}, and
 Diaconis, Shao and Soundararajan studied carries from the viewpoint of group
 theory and additive combinatorics~\cite{DiaconisShaoSoundararajan}.
 
+The distribution of the digit sum itself is classical. Central and local
+limit theorems for $s_q(n)$ are known, for example along polynomial
+sequences~\cite{BassilyKatai} and for digital expansions in linear recurrent
+bases~\cite{DrmotaGajdosik}, and its distribution along the primes was
+settled by Mauduit and Rivat~\cite{MauduitRivat}. Local limit theorems for
+additive functionals of non-homogeneous Markov chains are developed
+systematically by Dolgopyat and Sarig~\cite{DolgopyatSarig}. Their general
+results assume uniform ellipticity, which the carries chain lacks (a digit
+$0$ or $9$ of $t$ forbids some transitions), so Section~\ref{sec:osclaw}
+proves the sharp local limit theorem we need directly.
+
+What is known, then, is the carries chain, the limit theory of digit sums,
+and general local limit theory. What is new here is the dynamical
+application. We translate periodicity of a digit-sum map exactly into a
+carry-count event (Theorem~\ref{thm:2cycle}) and pin that count to the mean
+(Theorem~\ref{thm:balance}). We also give an exact variance formula for the
+carry count (Lemma~\ref{lem:exactvar}) and an extremal bound for its digit
+averages (Lemma~\ref{lem:kappa}). Together these yield the density and
+oscillation theorems.
+
 Maps that branch on the parity of $n$ are a natural test bed for
 deterministic dynamics that behave ``as if random'': the branching couples a
 local, arithmetic rule (here the propagation of carries) to a global
@@ -224,6 +244,41 @@ value at its centre with probability of order $(\log D)^{-1/2}$.
   $(\log D)^{-1/2}$ (Theorem~\ref{thm:evenb}); in base $2$ this requires a
   different switch mechanism (Lemma~\ref{lem:binswitch}).
 \end{itemize}
+
+The main line of the paper is the density of $2$-cycles and its oscillation
+(Sections~\ref{sec:resonance}--\ref{sec:balance}). The structural results
+(Sections~3--7) supply the tools, and the other bases and convergence
+(Sections~\ref{sec:bases} and~\ref{sec:convergence}) are further
+applications. Figure~\ref{fig:deps} shows how the main results depend on
+each other.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[x=1.32cm,y=1.05cm,
+  box/.style={draw=black!55, rounded corners=2pt, fill=white, font=\scriptsize, align=center, inner sep=3pt, minimum height=0.75cm},
+  main/.style={box, draw=black!85, line width=0.8pt},
+  arr/.style={-{Stealth[length=4pt]}, black!60, line width=0.6pt}]
+\node[box]  (carry) at (0,0)     {carry identity\\ Lemma~\ref{lem:carry}};
+\node[box]  (two)   at (3,0)     {$2$-cycles $\Leftrightarrow$ carry count\\ Thm~\ref{thm:2cycle}};
+\node[box]  (bal)   at (6.4,0)   {carry balance\\ Thm~\ref{thm:balance}};
+\node[box]  (sw)    at (3,-1.5)  {switch lemma,\\ sampling\\ Lemmas~\ref{lem:switch}, \ref{lem:sampling}};
+\node[main] (sharp) at (6.4,-1.5){exact order $(\log D)^{-1/2}$\\ Thm~\ref{thm:sharp}};
+\node[box]  (res)   at (0,-3)    {resonance\\ Thm~\ref{thm:resrig}};
+\node[box]  (var)   at (3.1,-3)  {exact variance,\\ extremal bound\\ Lemmas~\ref{lem:exactvar}, \ref{lem:kappa}};
+\node[box]  (llt)   at (6.4,-3)  {sharp local limit\\ Thm~\ref{thm:sharpllt}};
+\node[main] (osc)   at (3.1,-4.6)  {oscillation law\\ Thm~\ref{thm:osclaw}, Cor.~\ref{cor:osc}};
+\node[box]  (base)  at (9.6,-1.5){all even bases\\ Thm~\ref{thm:evenb}};
+\node[box]  (lev)   at (9.6,0)   {level equation,\\ prefix lifting\\ Thms~\ref{thm:level}, \ref{thm:lift}};
+\node[main] (cert)  at (9.6,-3)  {certificates\\ below $10^{2224}$\\ Thms~\ref{thm:cert}, \ref{thm:certres}};
+\draw[arr] (carry) -- (two); \draw[arr] (two) -- (bal); \draw[arr] (bal) -- (sharp);
+\draw[arr] (sw) -- (sharp); \draw[arr] (carry) -- (res); \draw[arr] (sw) -- (res);
+\draw[arr] (res) -- (osc); \draw[arr] (var) -- (osc); \draw[arr] (llt) -- (osc);
+\draw[arr] (var) -- (llt); \draw[arr] (sw) -- (llt); \draw[arr] (sharp) -- (base);
+\draw[arr] (lev.east) -- ++(0.35,0) |- (cert.east); \draw[arr] (carry.north) to[bend left=12] (lev.north);
+\end{tikzpicture}
+\caption{Dependencies between the main results. Boxes with heavier frames are
+the principal theorems.}\label{fig:deps}
+\end{figure}
 
 \section{Preliminaries}
 
@@ -1358,7 +1413,10 @@ bound $\Pr(|W|<\frac92\delta|S(t)|)\le e^{-9\delta|S(t)|/8}$ give
 \]
 for an absolute constant $K$.
 
-\emph{Central limit theorem.} The carries $c_1,c_2,\dots$ form a
+\emph{Central limit theorem.} (General local limit theorems for
+non-homogeneous chains~\cite{DolgopyatSarig} assume uniform ellipticity,
+which fails here when $t_i\in\{0,9\}$; we therefore combine a central limit
+theorem with the smoothing above.) The carries $c_1,c_2,\dots$ form a
 non-homogeneous Markov chain on $\{0,1\}$. Its $i$-th transition matrix has
 rows $(1-\frac{t_i}{10},\frac{t_i}{10})$ and
 $(1-\frac{t_i+1}{10},\frac{t_i+1}{10})$, so its Dobrushin contraction
@@ -1415,6 +1473,29 @@ Then, as $D\to\infty$,
   \frac{T(D)}{10^D}=\frac{1+o(1)}{36\sqrt{\frac{22\pi}9\bigl(\frac h6+B_D\bigr)}} .
 \]
 \end{theorem}
+
+\paragraph{Error budget.} The main term is of order $(\log D)^{-1/2}$.
+Table~\ref{tab:budget} lists the five sources of error in the proof, each of
+which is smaller than the main term.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{>{\raggedright}p{3.1cm}>{\raggedright}p{5.6cm}>{\raggedright\arraybackslash}p{4cm}}
+\toprule
+component & what is shown & error\\
+\midrule
+resonance approximation & $T(D)/10^D=\frac12\sum_tP_D(t)\rho(t)+\text{error}$ (Theorem~\ref{thm:resrig}) & $O((\log D)^2/\sqrt D)$\\
+bad digit sums & (G1) fails, or (G2) fails, or (G3) fails & $e^{-c\log^2D}+O(1/\log D)+O((\log D)^{-3/4})$\\
+variance of good $t$ & $V(t)=\frac{11}9(\frac h6+B_D)(1+o(1))$ & relative $O(\varepsilon_D+\log\log D/\log D)$\\
+local limit & $\rho(t)=(1+o(1))(2\pi V(t))^{-1/2}$ (Theorem~\ref{thm:sharpllt}) & relative $o(1)$, uniform in good $t$\\
+mass of good $t$ & $\frac12P_D(\text{good})=\frac1{36}+o(1)$ (Lemma~\ref{lem:lowdigits}) & $O(1/\log D)$\\
+\bottomrule
+\end{tabular}
+\caption{Error budget for Theorem~\ref{thm:osclaw}, with
+$\varepsilon_D=(\log D)^{-1/8}$. Absolute errors are $o((\log D)^{-1/2})$;
+relative errors multiply the main term by $1+o(1)$.}\label{tab:budget}
+\end{table}
 
 \begin{proof}
 By Theorem~\ref{thm:resrig} it suffices to evaluate
@@ -2046,6 +2127,24 @@ insufficient. At $\sigma=19{,}961$ an orbit reaches about $2\cdot10^8$, so
 extending the range needs $L=9$. The reported range is therefore the largest
 this block size certifies, not an artefact of stopping early.
 
+\paragraph{Verification protocol.} The \emph{proof} consists of exactly two
+finite computations, the last two rows of Table~\ref{tab:cert}. Their inputs
+are $(b,\sigma_{\max},L)=(10,19944,8)$ and $(2,3000,24)$, and their outputs are
+the highest points $20{,}020{,}006<10^8$ and $2{,}107{,}392<2^{24}$. Every other
+computation in this section is a \emph{cross-check}. These are the block
+method on small parameters, direct orbit enumeration, and the deliberately
+failing case $(2,16,8)$, which make implementation errors unlikely but prove
+nothing. The two proof computations are recomputed by a standalone checker,
+\texttt{verify\_certificates.py}, under $100$ lines that share no code with the
+rest of the package. It follows each entry $x_0<E$ until the orbit becomes
+negative or reaches a state already seen. Because the highest point of a
+forward orbit depends only on its starting state, storing it for every state
+visited (memoisation) is exact. If the program finishes, every orbit has been
+followed completely. It reproduces all $19{,}945$ per-$\sigma$ maxima of
+Figure~\ref{fig:climb} exactly, and reports failure on $(2,16,8)$. The archived
+release lists SHA-256 hashes of the checker, the certificate outputs and the
+manuscript source.
+
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.9\textwidth]{figures/climb_profile.pdf}
@@ -2322,7 +2421,7 @@ Theorems~\ref{thm:self}, \ref{thm:level}, \ref{thm:reverse}
 and~\ref{thm:balance}; the block and climb certificates of
 Theorem~\ref{thm:certres}, with their outputs; the exact carry-variance and
 oscillation-law computations (Section~\ref{sec:osclaw}); the basin census
-(Table~\ref{tab:cycles}); a test suite of $58$ tests; a single script that
+(Table~\ref{tab:cycles}); a test suite of $59$ tests; a single script that
 regenerates every table and figure; and SHA-256 hashes of the released
 sources and certificate outputs. All computations were run on an Apple M1
 laptop with 8\,GB of memory, using Python~3.11.9, NumPy~1.26.4 and
@@ -2341,6 +2440,18 @@ finite range) and \emph{conjectures}.
   University Press, 2005.
 \bibitem{Hoeffding} W.~Hoeffding, Probability inequalities for sums of bounded
   random variables, \emph{J. Amer. Statist. Assoc.} \textbf{58} (1963), 13--30.
+\bibitem{BassilyKatai} N.~L.~Bassily and I.~K\'atai, Distribution of the values
+of $q$-additive functions on polynomial sequences, \emph{Acta Math.\ Hungar.}
+\textbf{68} (1995), 353--361.
+\bibitem{DolgopyatSarig} D.~Dolgopyat and O.~M.~Sarig, \emph{Local Limit Theorems
+for Inhomogeneous Markov Chains}, Lecture Notes in Mathematics \textbf{2331},
+Springer, 2023.
+\bibitem{DrmotaGajdosik} M.~Drmota and J.~Gajdosik, The distribution of the
+sum-of-digits function, \emph{J.\ Th\'eor.\ Nombres Bordeaux} \textbf{10} (1998),
+17--32.
+\bibitem{MauduitRivat} C.~Mauduit and J.~Rivat, Sur un probl\`eme de Gelfond:
+la somme des chiffres des nombres premiers, \emph{Ann.\ of Math.} \textbf{171}
+(2010), 1591--1646.
 \bibitem{Dobrushin} R.~L.~Dobrushin, Central limit theorem for nonstationary
 Markov chains~I,~II, \emph{Theory Probab.\ Appl.} \textbf{1} (1956), 65--80 and
 329--383.

@@ -19,6 +19,9 @@ identifiers:
   - type: doi
     value: 10.5281/zenodo.23938785
     description: "Version v1.0.1"
+  - type: doi
+    value: 10.5281/zenodo.23938983
+    description: "Preprint (all versions)"
 keywords:
   - digit sum
   - carries

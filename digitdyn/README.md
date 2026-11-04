@@ -17,7 +17,7 @@ pip install numpy matplotlib pytest
 ## Quick start (from the directory that contains `digitdyn/`)
 
 ```bash
-python3 -m pytest digitdyn/tests -q      # 58 tests, about 15 s
+python3 -m pytest digitdyn/tests -q      # 59 tests, about 15 s
 python3 -m digitdyn.reproduce            # every table and figure, about 10-15 min
 ```
 
@@ -37,6 +37,7 @@ python3 -m digitdyn.reproduce            # every table and figure, about 10-15 m
 | `figures.py` | All data figures (PDF) |
 | `certify_b.py` | Block certificate (computer-assisted proof of eventual periodicity below b^D): e.g. `python3 -m digitdyn.certify_b 10 30 7` proves it for all n < 10^30 (about 3.5 min) |
 | `climbcert.py` | Climb certificate (memoised half-line orbits, no block arrays): `python3 -m digitdyn.climbcert 10 3000 8` checks σ ≤ 3000 (all n < 10^341, ~20 s); `... 2 3000 24` proves all n < 2^3024 (~30 s). Outputs in `data/climbcert_b*.txt` |
+| `verify_certificates.py` | Standalone checker for the two proof computations (no package imports) |
 | `climbcert_par.py` | Parallel climb certificate with the max climb per σ: `python3 -m digitdyn.climbcert_par 10 19944 8 8` proves all n < 10^2224 (~2 min on 8 cores); profile in `data/climb_profile_b10_S19944_L8.json` (Fig. `climb`) |
 | `osc_sampling.py` | Sampled peak/trough ratios with standard errors (Remark `rem:slow`) |
 | `variance.py` | Exact carry-count variance V(t) = (11/9) sum q_i(1-q_i) (Lemma `lem:exactvar`), sharp local limit check, and window averages behind the oscillation law (Theorem `thm:osclaw`) |
@@ -54,21 +55,35 @@ The manuscript separates **theorems** (proved), **computational statements**
 eventual periodicity of f is a conjecture; the code checks it only for the
 stated ranges.
 
-## Archiving
+## Archive
 
-Before publication, push this directory to a public repository and archive a
-tagged release (for example on Zenodo) to obtain a DOI; then replace the
-placeholder in the manuscript's "Data and code" section.
+The release used for the paper is archived on Zenodo as v1.0.1,
+[doi:10.5281/zenodo.23938785](https://doi.org/10.5281/zenodo.23938785)
+(all versions: [10.5281/zenodo.23938784](https://doi.org/10.5281/zenodo.23938784)).
+The preprint is [doi:10.5281/zenodo.23938983](https://doi.org/10.5281/zenodo.23938983).
 
 ## Verifying the certificates
 
-The computer-assisted part of the paper (Theorem `thm:certres`) is fully determined by
-`certify_b.py` and `climbcert.py`. To check it independently:
+The computer-assisted part of the paper (Theorem `thm:certres`) consists of exactly
+two finite computations; everything else is a cross-check.
 
-1. `python3 -m pytest digitdyn/tests` checks both certificate methods against direct
-   orbit enumeration on small parameter sets, including a case `(2,16,8)` where the
-   certificate must fail.
-2. `python3 -m digitdyn.climbcert 10 3000 8` and `python3 -m digitdyn.climbcert 2 3000 24`
-   regenerate `data/climbcert_b10.txt` and `data/climbcert_b2.txt`.
-3. `shasum -a 256 -c SHA256SUMS` confirms that the released sources and certificate
-   outputs are the ones used for the paper.
+| Proof computation | Input `(b, σ_max, L)` | Output (highest point) | Proves |
+| --- | --- | --- | --- |
+| base 10 | `(10, 19944, 8)` | 20,020,006 < 10^8 | all n < 10^2224 eventually periodic |
+| base 2 | `(2, 3000, 24)` | 2,107,392 < 2^24 | all n < 2^3024 eventually periodic |
+
+To check it independently:
+
+1. **Standalone checker** (93 lines, shares no code with the package):
+   ```bash
+   python3 digitdyn/verify_certificates.py 10 19944 8 --compare digitdyn/data/climb_profile_b10_S19944_L8.json
+   python3 digitdyn/verify_certificates.py 2 3000 24
+   python3 digitdyn/verify_certificates.py 2 8 8     # must report NOT VERIFIED
+   ```
+   The first command recomputes all 19,945 per-σ maxima and compares them with the
+   stored profile (about 2 minutes on 8 cores).
+2. **Cross-checks:** `python3 -m pytest digitdyn/tests` compares the block and climb
+   methods with direct orbit enumeration on small parameter sets, including the case
+   `(2,16,8)` where the certificate must fail.
+3. **Integrity:** `shasum -a 256 -c SHA256SUMS` (inside `digitdyn/`) confirms that the
+   sources, certificate outputs and manuscript are the ones used for the paper.

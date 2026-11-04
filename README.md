@@ -69,7 +69,7 @@ exact computations over a stated range, and conjectures.
 | [`digitdyn/`](digitdyn/) | Python package reproducing every computation in the manuscript ([README](digitdyn/README.md)) |
 | [`digitdyn/manuscript/`](digitdyn/manuscript/) | LaTeX source, PDF and figures |
 | [`digitdyn/data/`](digitdyn/data/) | Data behind the tables and figures, including the certificate outputs |
-| [`digitdyn/tests/`](digitdyn/tests/) | 58 tests checking theorems against brute force |
+| [`digitdyn/tests/`](digitdyn/tests/) | 59 tests checking theorems against brute force |
 | [`Digital Root/`](Digital%20Root/) | The original exploratory project (2025): cycle tables, plots and an early write-up |
 
 ## Quick start
@@ -78,8 +78,9 @@ From the repository root:
 
 ```bash
 pip install numpy matplotlib pytest
-python3 -m pytest digitdyn/tests                 # 58 tests, about 15 s
+python3 -m pytest digitdyn/tests                 # 59 tests, about 15 s
 python3 -m digitdyn.climbcert_par 10 19944 8 8   # certificate: all n < 10^2224 (~2 min, 8 cores)
+python3 digitdyn/verify_certificates.py 10 19944 8   # standalone check of the same proof
 python3 -m digitdyn.climbcert 2 3000 24          # certificate: all n < 2^3024
 python3 -m digitdyn.reproduce                    # regenerate every table and figure
 ```
@@ -121,6 +122,9 @@ version v1.0.1, Zenodo (2026), https://doi.org/10.5281/zenodo.23938785
   [10.5281/zenodo.23938785](https://doi.org/10.5281/zenodo.23938785)
 - **All versions**, which always resolves to the latest:
   [10.5281/zenodo.23938784](https://doi.org/10.5281/zenodo.23938784)
+
+The preprint itself is archived at
+[10.5281/zenodo.23938983](https://doi.org/10.5281/zenodo.23938983) (all versions).
 
 GitHub's "Cite this repository" button uses [`CITATION.cff`](CITATION.cff).
 
