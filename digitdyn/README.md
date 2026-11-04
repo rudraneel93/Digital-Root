@@ -36,7 +36,7 @@ python3 -m digitdyn.reproduce            # every table and figure, about 10-15 m
 | `basedensity.py` | Exact 2-cycle densities in bases 2, 4, 6 (multi-base resonance figure) |
 | `figures.py` | All data figures (PDF) |
 | `certify_b.py` | Block certificate (computer-assisted proof of eventual periodicity below b^D): e.g. `python3 -m digitdyn.certify_b 10 30 7` proves it for all n < 10^30 (about 3.5 min) |
-| `climbcert.py` | Climb certificate (memoised half-line orbits, no block arrays): `python3 -m digitdyn.climbcert 10 3000 8` checks σ ≤ 3000 (all n < 10^341, ~20 s); `... 2 3000 24` proves all n < 2^3024 (~30 s). Outputs in `data/climbcert_b*.txt` |
+| `climbcert.py` | Climb certificate (memoised half-line orbits, no block arrays): `python3 -m digitdyn.climbcert 10 3000 8` checks σ ≤ 3000, i.e. the earlier, smaller run proving all n < 10^341 (~20 s); the paper's result for all n < 10^2224 uses `climbcert_par.py` below; `... 2 3000 24` proves all n < 2^3024 (~30 s). Outputs in `data/climbcert_b*.txt` |
 | `verify_certificates.py` | Standalone checker for the two proof computations (no package imports) |
 | `climbcert_par.py` | Parallel climb certificate with the max climb per σ: `python3 -m digitdyn.climbcert_par 10 19944 8 8` proves all n < 10^2224 (~2 min on 8 cores); profile in `data/climb_profile_b10_S19944_L8.json` (Fig. `climb`) |
 | `osc_sampling.py` | Sampled peak/trough ratios with standard errors (Remark `rem:slow`) |

@@ -11,10 +11,14 @@ Above the top digit of t the chain continues with d = 0. Then
     rho(t) = [z^{s(t)/9}]  e_0^T  M(t_0) M(t_1) ... M(t_{l-1}) M(0)^K  1,
 the probability of exactly s(t)/9 carries (K large).
 
-Approximate 2-cycle density below 10^D (ignoring the weak dependence between
-s(a) = t, the parity of a and the carries):
-    T(D)/10^D  ~  sum_{t = 9 mod 18}  P_D(s(a) = t) * (1/2) * rho_odd(t),
-where rho_odd uses an odd units digit for a (5 of 10 values).
+Main term of the 2-cycle density below 10^D:
+    T(D)/10^D  =  sum_{t = 9 mod 18}  P_D(s(a) = t) * (1/2) * rho_odd(t)  +  O((log D)^2 / sqrt(D)),
+where rho_odd uses an odd units digit for a (5 of 10 values). The dependence
+between s(a) = t, the parity of a and the carries is NOT ignored in the paper:
+Theorem resrig proves this formula with the stated error bound (exchangeability
+of digits plus the sampling lemma). This module evaluates the main term; the
+tail of zero digits above t is truncated after `tail` columns, which changes
+rho by at most 10^-tail.
 """
 from __future__ import annotations
 
