@@ -1,5 +1,7 @@
 # Digital Root: the digit-sum parity map
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23938785.svg)](https://doi.org/10.5281/zenodo.23938785)
+
 Code, data and manuscript for the study of the **digit-sum parity map**
 
 ```
@@ -104,14 +106,23 @@ the manuscript replace the earlier counts.
 
 ## Citation
 
-If you use this code or these results, please cite the manuscript:
+If you use this code or these results, please cite the manuscript and the
+archived software:
 
 ```
 R. Das, Carries, Rails and Resonance: the Structure of the Digit-Sum Parity Map,
 manuscript (2026), https://github.com/rudraneel93/Digital-Root
+
+R. Das, digitdyn: code and data for "Carries, Rails and Resonance",
+version v1.0.1, Zenodo (2026), https://doi.org/10.5281/zenodo.23938785
 ```
 
-An archived release with a DOI will be added.
+- **v1.0.1 exactly**, the version used in the manuscript:
+  [10.5281/zenodo.23938785](https://doi.org/10.5281/zenodo.23938785)
+- **All versions**, which always resolves to the latest:
+  [10.5281/zenodo.23938784](https://doi.org/10.5281/zenodo.23938784)
+
+GitHub's "Cite this repository" button uses [`CITATION.cff`](CITATION.cff).
 
 ## License
 
