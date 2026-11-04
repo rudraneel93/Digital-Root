@@ -57,8 +57,8 @@ stated ranges.
 
 ## Archive
 
-The release used for the paper is archived on Zenodo as v1.0.1,
-[doi:10.5281/zenodo.23938785](https://doi.org/10.5281/zenodo.23938785)
+The release used for the paper is archived on Zenodo as v1.0.2,
+[doi:10.5281/zenodo.23940129](https://doi.org/10.5281/zenodo.23940129)
 (all versions: [10.5281/zenodo.23938784](https://doi.org/10.5281/zenodo.23938784)).
 The preprint is [doi:10.5281/zenodo.23938983](https://doi.org/10.5281/zenodo.23938983).
 
