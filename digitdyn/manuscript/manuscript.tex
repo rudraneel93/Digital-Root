@@ -52,7 +52,9 @@ for the variance of the carry count and a sharp local limit theorem, we prove
 an oscillation law: $\sqrt{\log_{10}D}\,T(D)/10^D$ has no limit, its limit
 points form the interval $[K_0\sqrt{726/301},\,K_0\sqrt6]$ with
 $K_0=1/(12\sqrt{11\pi})$, and the peak-to-trough ratio is
-$\sqrt{301}/11\approx1.577$.
+$\sqrt{301}/11\approx1.577$. The approach to these limits is logarithmically
+slow: for every $D$ within reach of exact computation the observed ratio is
+close to $1.4$, and the limit appears only in the main term at $D\gtrsim10^{24}$.
 
 Along the way we establish several exact structural facts: on multiples of
 nine, $f$ is conjugate to $m\mapsto m\pm\kappa(m)$ with $\kappa(m)=s(9m)/9$
@@ -327,7 +329,9 @@ $c_L(\sigma)$ & number of cycles of $g_\sigma$ confined to one block (Section~\r
 \end{table}
 
 All numbers are non-negative integers written in base $10$, with digits
-$n=\sum_i n_i10^i$. For $a,b\ge0$ let $\C(a,b)$ be the number of carries in
+$n=\sum_i n_i10^i$. We write $\log$ for the natural logarithm and $\log_{10}$,
+$\log_b$ for other bases; statements with $O(\cdot)$ or $\Theta(\cdot)$ do not
+depend on the base. For $a,b\ge0$ let $\C(a,b)$ be the number of carries in
 the schoolbook addition $a+b$ (counting a final carry into a new leading
 digit), and for $a\ge b\ge0$ let $\B(a,b)$ be the number of borrows in $a-b$.
 
@@ -869,7 +873,7 @@ $(y_0,\dots,y_{k-1})$ are within total variation distance $k(k-1)/(2D)$.
 Realise both by drawing balls from an urn of $D$ labelled balls, without and
 with replacement. The two procedures can be coupled to agree unless a ball is
 drawn twice with replacement, which has probability at most
-$\binom k2/D$~\cite{DiaconisFreedman}.
+$\binom k2/D=k(k-1)/(2D)$~\cite{DiaconisFreedman}.
 \end{proof}
 
 \begin{lemma}[Low digits of the digit sum]\label{lem:lowdigits}
@@ -1210,9 +1214,11 @@ the roughly $h/2$ odd positions below $h$ carry a digit in $\{1,\dots,8\}$
 with probability at least $1-e^{-c_1h}$. By Lemma~\ref{lem:lowdigits} with
 $M=9\cdot10^h$,
 \[
-  \Pr(U')\ge\tfrac1{18}\bigl(1-e^{-c_1h}\bigr)-K_2\,\frac{9\cdot10^h}{\sqrt D}
-  \ge\tfrac1{20}\quad\text{for large }D.
+  \Pr(U')\;\ge\;\frac{1-e^{-c_1h}}{18}\;-\;\frac{9K_2\cdot10^h}{\sqrt D}
+  \;\ge\;\frac1{20}\quad\text{for large }D,
 \]
+where the second term, the total-variation error of Lemma~\ref{lem:lowdigits},
+is not multiplied by $\frac1{18}$.
 
 \emph{Step 2: reduction to independent digits.} Fix digit counts $N$ in $A'$
 such that $t=t(N)$ satisfies $U'$, and let $m=s(t)/9$. Then $p_d=N_d/D\ge1/20$
@@ -1290,7 +1296,7 @@ for large $D$. Averaging over $N$,
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.92\textwidth]{figures/normalized_density.pdf}
-\caption{The $2$-cycle density multiplied by $\sqrt{\ln D}$ stays between
+\caption{The $2$-cycle density multiplied by $\sqrt{\log_{10}D}$ stays between
 positive bounds, as Theorem~\ref{thm:sharp} asserts; the log-periodic
 modulation of Figure~\ref{fig:density} remains.}\label{fig:normalized}
 \end{figure}
@@ -1609,17 +1615,48 @@ $\beta_D\to\frac{30}{121}$. Finally, $|B_{D+1}-B_D|\le\sum_{i>h}4.5\cdot10^{-i}
 $\Phi(D+1)-\Phi(D)\to0$, and a sequence with vanishing increments that
 oscillates between two values has every intermediate value as a limit point.
 
-For the typical value, let $D$ be uniform in $[10^j,10^{j+1})$ and
-$\omega=\lceil\log_{10}j\rceil$. Writing $D=2u$ or $2u+1$ gives
-$\lfloor4.5D\rfloor=9u$ or $9u+4$, and $u$ runs over more than $10^j/2$
-consecutive integers. Since $\gcd(9,10)=1$, the residue of $\lfloor4.5D\rfloor$
-modulo $10^{j-\omega}$ is within total variation $O(10^{-\omega})$ of uniform.
-So its digits in positions $h,\dots,j-\omega$ are close to independent and
-uniform, and, as in step (G3) of the proof of Theorem~\ref{thm:osclaw}, the sum of
-$\varphi(\{4.5D/10^i\})$ over these positions is $(j-h)/6+O_P(\sqrt j)$. The
-top $\omega$ positions contribute $O(\omega)=o(j)$. So
-$\beta_D\to\frac16$ in probability and
-$\Phi(D)\to K_0(\frac16+\frac16)^{-1/2}=K_0\sqrt3$.
+The statement about typical $D$ is Lemma~\ref{lem:typical} below.
+\end{proof}
+
+\begin{lemma}[Typical $D$]\label{lem:typical}
+Let $\beta_D=B_D/(\frac12\log_{10}D)$. For every $\varepsilon>0$, the
+proportion of $D\in[10^j,10^{j+1})$ with $|\beta_D-\frac16|>\varepsilon$ tends
+to $0$ as $j\to\infty$. Consequently $\Phi(D)\to K_0\sqrt3$ for almost all $D$,
+in the sense of Corollary~\ref{cor:osc}.
+\end{lemma}
+
+\begin{proof}
+Let $D$ be uniform in $[10^j,10^{j+1})$, $y=4.5D$ and $\tilde y=\lfloor y\rfloor$.
+Since $|y-\tilde y|\le\frac12$ and $\varphi$ is $1$-Lipschitz on $\mathbb R/\mathbb Z$,
+replacing $\{y/10^i\}$ by $\{\tilde y/10^i\}$ changes $B_D$ by at most
+$\sum_{i>h}10^{-i}\le10^{-h}$.
+
+\emph{Digits of $\tilde y$ are nearly uniform.} Let $\omega=\lceil\log_{10}j\rceil$
+and $m=j-\omega$. Writing $D=2u$ or $D=2u+1$ gives $\tilde y=9u$ or $9u+4$, and
+for each parity $u$ runs over at least $4\cdot10^j$ consecutive integers.
+Since $\gcd(9,10^m)=1$, the map $u\mapsto9u\bmod10^m$ is a bijection on every
+complete residue system, so the residue of $\tilde y$ modulo $10^m$ is within
+total variation $10^m/(4\cdot10^j)\le10^{-\omega}$ of uniform. Hence the digits
+of $\tilde y$ in positions $0,\dots,m-1$ are within total variation
+$10^{-\omega}$ of independent uniform digits.
+
+\emph{Concentration.} Under independent uniform digits, $x_i=\{\tilde y/10^i\}$
+is uniform on $10^{-i}\mathbb Z\cap[0,1)$, so
+$\mathbb E\varphi(x_i)=\frac16-\frac16 10^{-2i}$. As in step (G3) of the proof of
+Theorem~\ref{thm:osclaw}, $|\operatorname{Cov}(\varphi(x_i),\varphi(x_k))|\le
+2\cdot10^{-(k-i)}$ for $i<k$, so
+$S=\sum_{h<i\le m}\varphi(x_i)$ has mean $\frac{m-h}6+O(1)$ and variance
+$O(m-h)$. Chebyshev's inequality gives
+\[
+  \Pr\Bigl(\bigl|S-\tfrac{m-h}6\bigr|>\tfrac\varepsilon2(m-h)\Bigr)
+  \le\frac{C}{\varepsilon^2(m-h)}+10^{-\omega}\longrightarrow0 .
+\]
+\emph{The remaining positions.} Positions $m<i\le j+1$ contribute at most
+$(\omega+1)/4$, and positions $i>j+1$ at most $\frac19$, both $o(j)$. Since
+$m-h=\frac12\log_{10}D+o(\log D)$, it follows that $\beta_D\to\frac16$ in
+probability. Finally, Corollary~\ref{cor:osc} gives
+$\Phi(D)=K_0(\frac16+\beta_D)^{-1/2}+o(1)$ uniformly in $D$, so
+$\Phi(D)\to K_0(\frac13)^{-1/2}=K_0\sqrt3$ in probability.
 \end{proof}
 
 \begin{figure}[t]
@@ -2229,7 +2266,12 @@ b^L/\theta_L^2 & 0.21&0.31&0.11&0.26 & 0.35&0.32&0.28&0.27&0.26
 \end{array}
 \]
 In both bases the block needed is quadratic in $\sigma$, with
-$b^{L_{\min}}\approx\sigma^2/4$. This is the order of the height
+$b^{L_{\min}}\approx\sigma^2/4$ over the tested range; for $L=8$ in base $10$
+every $\sigma\le19{,}944$ passes, and $10^8/19{,}944^2\approx0.25$. This
+threshold is set by rare spikes, not by typical climbs. Figure~\ref{fig:climb}
+shows that most climbs are far lower, while the spikes near round values of
+the step reach about $\sigma^2/2$ ($2\cdot10^8$ at $\sigma=19{,}961$). So $\sigma^2/4$
+describes an upper envelope of the climbs. Quadratic growth is the order of the height
 $2b^{\ell+\kappa}\le2((b-1)bk)^2$ of a constant-level run in
 Theorem~\ref{thm:shortruns}. It suggests that climbs from the bottom are no
 higher than single constant-level runs, so the level changes inside an ascent
@@ -2419,6 +2461,14 @@ and $9$ once, both totalling $135$.
   possible cycle lengths.
 \item Explain the rare cycles with two ascending runs.
 \end{enumerate}
+
+\section*{Use of AI tools}
+The research, computations and writing were carried out with substantial
+assistance from Claude (Anthropic), an AI system. This covered developing and
+checking proofs, writing and running the code, extending the computations, and
+drafting and revising the text. The author directed the work, checked the
+results and takes full responsibility for the content. All computations can be
+reproduced from the archived code.
 
 \section*{Data and code}
 All computations are reproducible with the accompanying Python package
