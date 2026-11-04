@@ -1485,6 +1485,19 @@ $\varepsilon'=\varepsilon\eta/3$, and then $n_0$ so large that
 $V\ge0.08n_0\ge V_0$ and the remaining terms are below $\varepsilon/3$.
 \end{proof}
 
+\begin{remark}[Why the switch hypothesis is needed]\label{rem:degenerate}
+Theorem~\ref{thm:sharpllt} cannot hold uniformly over all $t$. For
+$t=10^m-1$ every column carries up to column $m-1$, and above it the carry
+continues through each $0$-column with probability $\frac1{10}$, so $C=m+G$ with
+$\Pr(G=k)=0.9\cdot0.1^k$. Then $\operatorname{Var}C=\frac{10}{81}$, which agrees
+with Lemma~\ref{lem:exactvar}, and $\Pr(C=m)=0.9$, so there is no Gaussian
+behaviour. Such $t$ have no digits in $\{1,\dots,8\}$, so $S(t)=\emptyset$, and
+they are excluded by the hypothesis $|S(t)|\ge\max(n_0,\lambda\ell)$. In the
+proof of Theorem~\ref{thm:osclaw} such $t$ fail condition (G2) and carry
+negligible weight. The resonance there comes from the \emph{leading} digits of
+typical digit sums, not from degenerate $t$, and it is measured by $B_D$.
+\end{remark}
+
 \begin{theorem}[Oscillation law]\label{thm:osclaw}
 Let $h=h_D=\lfloor\log_{10}(\sqrt D/\log D)\rfloor$ and
 \[
@@ -2445,7 +2458,7 @@ and $9$ once, both totalling $135$.
   $5.2\%$ of $n\le N$ are periodic for $N=10^5,10^6,10^7$, and the share of
   them on $2$-cycles falls from $73\%$ to $60\%$. Sampling $40{,}000$ random
   $D$-digit numbers gives periodic proportions of $5.7\%$, $4.5\%$, $4.9\%$,
-  $4.4\%$, $5.0\%$, $4.3\%$ and $4.2\%$ (standard error $0.1\%$) for
+  $4.4\%$, $5.0\%$, $4.3\%$ and $4.2\%$ (standard error $0.1\%$; a start counts as periodic when its own orbit returns to it; each orbit is followed until it repeats, with a cutoff of $20{,}000$ steps that no sample reached, the longest taking $99$ steps) for
   $D=8,16,\dots,512$, with $4$-cycles about as frequent as $2$-cycles and
   apparently oscillating with $D$. The data therefore neither confirm nor
   refute density zero. The natural conjecture is that the periodic proportion
